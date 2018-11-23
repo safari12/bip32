@@ -22,5 +22,16 @@ defmodule BIP32.PrivateKeyTest do
       assert byte_size(key.data) == 32
       assert BIP32.to_base58(key) == @sample_key_inputs[:root_private_extended]
     end
+
+    test "should return invalid network type error" do
+      assert {:error, :invalid_network_type} ==
+        BIP32.PrivateKey.generate_master(
+          @sample_key_inputs[:seed],
+          @sample_key_inputs[:currency],
+          @sample_key_inputs[:version],
+          @sample_key_inputs[:seed_key],
+          :blah
+        )
+    end
   end
 end
