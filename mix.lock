@@ -1,6 +1,8 @@
 %{
   "base58": {:git, "https://github.com/safari12/base58.git", "8cc6ed947389ad43c01cf802763d95e9178ab823", [tag: "1.0.0"]},
   "base58check": {:git, "https://github.com/safari12/base58check.git", "3489ab0aab9a55e4a394eb4ef0120b362d323236", []},
+  "libsecp256k1": {:git, "https://github.com/mbrix/libsecp256k1.git", "671be513a6c19db47fbeea0ceefbf61421d196cc", []},
+  "ok": {:hex, :ok, "2.0.0", "bbfa96d5c35956b8a687aa1513a08f1287f77993a7b5554cd3db33c19c9e76fa", [:mix], [], "hexpm"},
   "scrypto": {:git, "https://github.com/safari12/scrypto.git", "142fac656cbede75af99af68c7fa99086774e51a", []},
-  "secp256k1": {:git, "https://github.com/safari12/secp256k1.git", "73ee311fad8d62450208e370e1af3d25c2abdf3c", []},
+  "secp256k1": {:git, "https://github.com/safari12/secp256k1.git", "3905bf7cf39c2ab4ab262a36e212910db1b10ced", []},
 }

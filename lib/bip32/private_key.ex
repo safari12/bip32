@@ -1,34 +1,35 @@
 defmodule BIP32.PrivateKey do
   use BIP32.Key
+  use OK.Pipe
 
-  @doc """
-  Generate master BIP32 private key
-  """
-  @spec generate_master(binary, binary, atom, String.t, atom) :: t
+  @type seed :: <<_::512>>
+
+  @spec generate_master(seed, currency, version, network) :: t
   def generate_master(
     seed,
-    version,
     currency,
-    chain_code,
+    version,
+    seed_key \\ "BIP32 Seed",
     network \\ :mainnet
   ) do
-    :crypto.hmac(:sha512, chain_code, seed)
-    |> build_master(version, currency, network)
-  end
+    # seed
+    # ~> (&:crypto.hmac(:sha512, seed_key, &1)).()
+    # ~> IO.inspect
 
-  defp serialize(%__MODULE__{} = key) do
-    serialized_key = <<0::size(8), key.key::binary>>
-    serialize(key, serialized_key)
+    {:ok, seed}
+    ~> (&:crypto.hmac(:sha512, seed_key, &1)).()
+    ~>> build_master(currency, version, network)
   end
 
   defp build_master(
     <<priv_key::binary-32, c_code::binary>>,
-    version,
     currency,
+    version,
     network
   ) do
-    key = create(version, network, currency)
-    %{key | key: priv_key, chain_code: c_code}
+    {:ok, version}
+    ~>> create(currency, network)
+    ~> Map.put(:data, priv_key)
+    ~>> Map.put(:chain_code, c_code)
   end
-
 end

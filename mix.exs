@@ -22,7 +22,8 @@ defmodule BIP32.MixProject do
   defp deps do
     [
       {:secp256k1, github: "safari12/secp256k1"},
-      {:base58check, github: "safari12/base58check"}
+      {:base58check, github: "safari12/base58check"},
+      {:ok, "~> 2.0"}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
