@@ -4,7 +4,7 @@ defmodule BIP32.PrivateKey do
 
   @type seed :: <<_::512>>
 
-  @spec generate_master(seed, currency, version, network) :: t
+  @spec generate_master(seed, currency, version, binary, network) :: t | {:error, atom}
   def generate_master(
     seed,
     currency,
@@ -12,10 +12,6 @@ defmodule BIP32.PrivateKey do
     seed_key \\ "BIP32 Seed",
     network \\ :mainnet
   ) do
-    # seed
-    # ~> (&:crypto.hmac(:sha512, seed_key, &1)).()
-    # ~> IO.inspect
-
     {:ok, seed}
     ~> (&:crypto.hmac(:sha512, seed_key, &1)).()
     ~>> build_master(currency, version, network)
