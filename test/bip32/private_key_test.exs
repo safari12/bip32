@@ -1,10 +1,12 @@
 defmodule BIP32.PrivateKeyTest do
   use ExUnit.Case
 
-  @sample_key_inputs Application.get_env(:bip32, :sample_key_inputs)
+  alias BIP32Test.Util
+
+  @sample_key_inputs Util.get_sample_key_inputs
 
   describe "generate_master" do
-    test "should return a valid master private key" do
+    test "should generate root private extended key" do
       key = BIP32.PrivateKey.generate_master(
         @sample_key_inputs[:seed],
         @sample_key_inputs[:currency],

@@ -39,7 +39,7 @@ defmodule BIP32 do
 
   @spec serialize(PublicKey.t) :: {PublicKey.version, binary}
   defp serialize(%PublicKey{} = public_key) do
-    public_key
+    public_key.data
     |> PublicKey.compress
     |> serialize(public_key)
   end

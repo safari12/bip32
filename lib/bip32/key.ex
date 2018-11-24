@@ -33,7 +33,7 @@ defmodule BIP32.Key do
       ]
 
       @spec create(version, currency, network) :: {:ok, t}
-      defp create(version, currency, network)
+      def create(version, currency, network)
         when network in [:mainnet, :testnet]
       do
         {:ok, %__MODULE__{
@@ -48,7 +48,7 @@ defmodule BIP32.Key do
         }}
       end
 
-      defp create(_, _, _), do: {:error, :invalid_network_type}
+      def create(_, _, _), do: {:error, :invalid_network_type}
 
     end
   end
