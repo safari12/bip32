@@ -177,4 +177,16 @@ defmodule BIP32 do
       child_num: index}
   end
 
+  defp to_public_hash(public_key) do
+    public_key
+    |> (&:crypto.hash(:sha256, &1)).()
+    |> (&:crypto.hash(:ripemd160, &1)).()
+  end
+
+  def to_public_address(public_key, version \\ <<0x00>>) do
+    public_key
+    |> to_public_hash
+    |> Base58Check.encode(version)
+  end
+
 end
