@@ -31,8 +31,8 @@ defmodule BIP32.DeriveKeyTest do
   end
 
   describe "derive account children" do
-    test "children", %{master_key: master_key} do
-      @sample_account[:children]
+    test "child keys", %{master_key: master_key} do
+      @sample_account[:child_keys]
       |> Enum.with_index
       |> Enum.each(fn {expected_child_key, index} ->
         priv_key = master_key |> account_child_private_key(index)
@@ -49,8 +49,8 @@ defmodule BIP32.DeriveKeyTest do
         <<_prefixs::binary-2, encoded_pub_key_data::binary>> =
           encoded_pub_key
 
-        assert encoded_priv_key  == expected_child_key[:private_key]
-        assert encoded_pub_key_data == expected_child_key[:public_key]
+        assert encoded_priv_key  == expected_child_key[:private]
+        assert encoded_pub_key_data == expected_child_key[:public]
       end)
     end
   end
